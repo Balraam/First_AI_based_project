@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: first-Ai-project
+
+  ai:
+    openai:
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai   # point to Groq instead of OpenAI
+      chat:
+        options:
+          model: llama-3.1-8b-instant          # free Groq model
+
+server:
+  port: 8080
+
+chatbot:
+  system-prompt: >
+    You are a helpful, friendly, and knowledgeable AI assistant.
+    You provide clear, accurate, and concise answers.
+    If you are unsure about something, say so honestly.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.chatbot: DEBUG
+    org.springframework.ai: INFO
+
