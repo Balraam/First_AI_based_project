@@ -17,8 +17,8 @@ A production-ready chatbot built with **Spring Boot 3** and **Spring AI**, power
 | Layer | Technology |
 |-------|-----------|
 | Framework | Spring Boot 3.3.4 |
-| AI Client | Spring AI 1.0.0-M3 |
-| AI Provider | OpenAI (gpt-4o-mini) |
+| AI Client | Spring AI 1.0.0-M6 |
+| AI Provider | OpenAI (llama-3.1-8b-instant) Groq|
 | Language | Java 17 |
 | Build | Maven |
 
@@ -55,7 +55,7 @@ src/
 
 **Option A — Environment variable (recommended):**
 ```bash
-export OPENAI_API_KEY=sk-your-key-here
+export OPENAI_API_KEY=GROQ_API_KEY
 ```
 
 **Option B — application.yml directly:**
@@ -63,7 +63,11 @@ export OPENAI_API_KEY=sk-your-key-here
 spring:
   ai:
     openai:
-      api-key: sk-your-key-here
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai
+      chat:
+        options:
+          model: llama-3.1-8b-instant
 ```
 
 ### 2. Run the app
@@ -121,11 +125,12 @@ In `application.yml`:
 ```yaml
 spring:
   ai:
-    openai:
+  openai:
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai   
       chat:
         options:
-          model: gpt-4o          # or gpt-4o-mini, gpt-3.5-turbo
-          temperature: 0.7
+          model: llama-3.1-8b-instant  
 ```
 
 ---
